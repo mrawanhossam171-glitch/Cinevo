@@ -1,0 +1,2172 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#090b14">
+<title>Cinevo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #090b14;
+  --panel: #111522;
+  --panel2: #191e2e;
+  --text: #f7f7fb;
+  --muted: #a2a8bc;
+  --line: #ffffff14;
+  --pink: #ff3864;
+  --orange: #ff8058;
+  --green: #7de2b0;
+  --gold: #ffd36a;
+  --shadow: 0 22px 70px #0008;
+  --radius: 18px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Cairo, Arial, sans-serif;
+  min-height: 100vh;
+}
+
+body.light {
+  --bg: #f3f4f9;
+  --panel: #fff;
+  --panel2: #e9ebf3;
+  --text: #161827;
+  --muted: #656b80;
+  --line: #11152218;
+  --shadow: 0 22px 70px #18204020;
+}
+
+button, input, select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:focus-visible, input:focus-visible, select:focus-visible, a:focus-visible {
+  outline: 2px solid var(--pink);
+  outline-offset: 3px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+.container {
+  width: min(1450px, 92%);
+  margin-inline: auto;
+}
+
+.navbar {
+  height: 76px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: color-mix(in srgb, var(--bg) 90%, transparent);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--line);
+}
+
+.nav-inner {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+}
+
+.logo {
+  font-size: 27px;
+  font-weight: 900;
+  direction: ltr;
+  white-space: nowrap;
+  letter-spacing: -1px;
+}
+
+.logo span {
+  color: var(--pink);
+}
+
+.navlinks {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+
+.navlinks a {
+  font-size: 13px;
+  color: var(--muted);
+  transition: .2s;
+}
+
+.navlinks a:hover, .navlinks a.active {
+  color: var(--pink);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.icon-button, .nav-fav {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  color: var(--text);
+  border-radius: 12px;
+  padding: 9px 12px;
+}
+
+.icon-button {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+}
+
+.nav-fav b {
+  color: var(--pink);
+}
+
+.mobile-menu {
+  display: none;
+}
+
+.hero {
+  position: relative;
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(270deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 90%, transparent) 37%, transparent 100%), linear-gradient(0deg, var(--bg), transparent 40%), url('https://image.tmdb.org/t/p/original/8b8R8l88Qje9dn9OE8PY05Nxl1X.jpg') center 30%/cover;
+}
+
+.hero:before {
+  content: "";
+  position: absolute;
+  inset: auto auto -170px -100px;
+  width: 430px;
+  height: 430px;
+  border-radius: 50%;
+  background: #ff386426;
+  filter: blur(95px);
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 670px;
+  padding-block: 65px;
+}
+
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: #ff91a7;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .5px;
+}
+
+.kicker:before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--pink);
+  box-shadow: 0 0 15px var(--pink);
+}
+
+.hero h1 {
+  font-size: clamp(38px, 5.8vw, 70px);
+  line-height: 1.35;
+  margin: 15px 0;
+  font-weight: 900;
+  letter-spacing: -1.8px;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, var(--pink), var(--orange));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero p {
+  max-width: 560px;
+  line-height: 2;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 11px;
+  margin-top: 25px;
+}
+
+.btn {
+  border: 1px solid transparent;
+  border-radius: 12px;
+  padding: 12px 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 800;
+  transition: transform .2s, filter .2s, background .2s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+}
+
+.btn-primary {
+  background: linear-gradient(120deg, var(--pink), var(--orange));
+  color: white;
+}
+
+.btn-secondary {
+  background: var(--panel2);
+  border-color: var(--line);
+  color: var(--text);
+}
+
+.btn-small {
+  padding: 8px 12px;
+  font-size: 12px;
+  border-radius: 9px;
+}
+
+main {
+  padding-block: 44px 80px;
+}
+
+.section {
+  margin-bottom: 54px;
+  scroll-margin-top: 95px;
+}
+
+.section-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+
+.section-title {
+  font-size: 25px;
+  font-weight: 900;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-title:before {
+  content: "";
+  width: 5px;
+  height: 28px;
+  border-radius: 5px;
+  background: linear-gradient(var(--pink), var(--orange));
+}
+
+.section-subtitle {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 5px;
+}
+
+.section-count {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.search-panel {
+  padding: 17px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  margin-bottom: 18px;
+}
+
+.search-grid {
+  display: grid;
+  grid-template-columns: minmax(200px, 1fr) 155px 155px 155px auto;
+  gap: 10px;
+}
+
+.search-wrap {
+  position: relative;
+}
+
+.search-wrap .search-icon {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: var(--muted);
+}
+
+.control {
+  height: 48px;
+  width: 100%;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--text);
+  border-radius: 11px;
+  padding: 0 13px;
+  min-width: 0;
+}
+
+.search-wrap .control {
+  padding-right: 42px;
+}
+
+.control:focus {
+  border-color: var(--pink);
+  outline: none;
+}
+
+.control option {
+  background: var(--panel);
+}
+
+.quick-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.chip {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--muted);
+  padding: 8px 14px;
+  border-radius: 30px;
+  font-size: 12px;
+  transition: .2s;
+}
+
+.chip:hover, .chip.active {
+  background: var(--pink);
+  border-color: var(--pink);
+  color: white;
+}
+
+.results-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 18px 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.sort-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sort-wrap select {
+  height: 36px;
+  width: auto;
+  max-width: 180px;
+}
+
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 20px 16px;
+}
+
+.movie-card {
+  min-width: 0;
+  position: relative;
+  overflow: hidden;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  transition: transform .25s, border-color .25s, box-shadow .25s;
+  animation: rise .35s ease both;
+}
+
+.movie-card:hover {
+  transform: translateY(-6px);
+  border-color: #ff386477;
+  box-shadow: 0 18px 38px #0004;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.poster {
+  aspect-ratio: 2/3;
+  position: relative;
+  overflow: hidden;
+  background: var(--panel2);
+}
+
+.poster img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform .45s;
+}
+
+.movie-card:hover .poster img {
+  transform: scale(1.055);
+}
+
+.poster:after {
+  content: "";
+  position: absolute;
+  inset: 45% 0 0;
+  background: linear-gradient(transparent, #080a13a8);
+  pointer-events: none;
+}
+
+.poster-tag {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  background: #080a13cc;
+  border: 1px solid #ffffff30;
+  border-radius: 7px;
+  padding: 4px 8px;
+  font-size: 10px;
+  color: white;
+}
+
+.fav-toggle {
+  position: absolute;
+  top: 9px;
+  left: 9px;
+  z-index: 3;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #ffffff3b;
+  border-radius: 50%;
+  background: #080a13c9;
+  color: white;
+  font-size: 19px;
+  display: grid;
+  place-items: center;
+  transition: .2s;
+}
+
+.fav-toggle:hover, .fav-toggle.saved {
+  background: var(--pink);
+  border-color: var(--pink);
+}
+
+.rating {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  z-index: 2;
+  direction: ltr;
+  font-size: 12px;
+  font-weight: 800;
+  color: white;
+}
+
+.rating span {
+  color: var(--gold);
+}
+
+.movie-info {
+  padding: 13px 12px 12px;
+}
+
+.movie-title {
+  font-size: 13px;
+  font-weight: 800;
+  margin: 0 0 9px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.movie-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.movie-year {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.genre-pill {
+  font-size: 10px;
+  color: #ff8ca2;
+  background: #ff386418;
+  padding: 4px 7px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.details-button {
+  width: 100%;
+  margin-top: 12px;
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px;
+  font-size: 11px;
+  transition: .2s;
+}
+
+.details-button:hover {
+  background: var(--pink);
+  border-color: var(--pink);
+  color: white;
+}
+
+.empty-state {
+  grid-column: 1/-1;
+  padding: 62px 18px;
+  text-align: center;
+  background: var(--panel);
+  border: 1px dashed var(--line);
+  border-radius: var(--radius);
+}
+
+.empty-icon {
+  font-size: 42px;
+  margin-bottom: 12px;
+}
+
+.empty-state h3 {
+  margin: 0 0 8px;
+  font-size: 20px;
+}
+
+.empty-state p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.empty-state .btn {
+  margin-top: 17px;
+}
+
+.load-more-wrap {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+
+.page-button {
+  min-width: 39px;
+  height: 39px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel);
+  color: var(--text);
+}
+
+.page-button.active, .page-button:hover {
+  background: var(--pink);
+  border-color: var(--pink);
+  color: white;
+}
+
+.shelf {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.shelf-card {
+  min-height: 145px;
+  position: relative;
+  overflow: hidden;
+  padding: 21px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: linear-gradient(130deg, var(--panel2), var(--panel));
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  transition: .2s;
+}
+
+.shelf-card:hover {
+  transform: translateY(-3px);
+  border-color: #ff386477;
+}
+
+.shelf-card:before {
+  content: attr(data-icon);
+  position: absolute;
+  left: 13px;
+  top: 8px;
+  font-size: 55px;
+  opacity: .22;
+  transform: rotate(-12deg);
+}
+
+.shelf-card strong {
+  font-size: 17px;
+  position: relative;
+}
+
+.shelf-card span {
+  font-size: 12px;
+  color: var(--muted);
+  position: relative;
+}
+
+.api-panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-top: 45px;
+}
+
+.api-panel h3 {
+  margin: 0 0 7px;
+  font-size: 18px;
+}
+
+.api-panel p {
+  font-size: 12px;
+  line-height: 2;
+  color: var(--muted);
+}
+
+.api-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.api-row input {
+  direction: ltr;
+}
+
+.status {
+  font-size: 12px;
+  color: var(--green);
+  margin-top: 10px;
+  min-height: 20px;
+}
+
+.note {
+  font-size: 11px!important;
+}
+
+footer {
+  border-top: 1px solid var(--line);
+  padding: 27px 0 34px;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+footer strong {
+  direction: ltr;
+  display: inline-block;
+  color: var(--text);
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: #000c;
+  backdrop-filter: blur(9px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal.open {
+  display: flex;
+}
+
+.modal-box {
+  width: min(820px, 100%);
+  max-height: 92vh;
+  overflow: auto;
+  position: relative;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  animation: rise .22s ease;
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 5;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ffffff30;
+  border-radius: 50%;
+  background: #090b14d9;
+  color: white;
+  font-size: 24px;
+}
+
+.modal-backdrop {
+  height: 270px;
+  position: relative;
+  background: var(--panel2);
+}
+
+.modal-backdrop img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: .65;
+}
+
+.modal-backdrop:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, var(--panel), transparent);
+}
+
+.modal-content {
+  position: relative;
+  margin-top: -65px;
+  padding: 0 28px 28px;
+  z-index: 2;
+}
+
+.modal-content h2 {
+  font-size: 30px;
+  margin: 0 0 10px;
+  font-weight: 900;
+}
+
+.modal-meta {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 17px;
+}
+
+.modal-meta span {
+  font-size: 11px;
+  border: 1px solid var(--line);
+  background: var(--panel2);
+  border-radius: 7px;
+  padding: 6px 9px;
+}
+
+.modal-overview {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 2.1;
+}
+
+.modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.trailer-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: #000;
+  margin-top: 20px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.trailer-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.cast-list {
+  display: flex;
+  gap: 12px;
+  overflow: auto;
+  padding: 8px 0 15px;
+}
+
+.cast-person {
+  min-width: 105px;
+  max-width: 105px;
+}
+
+.cast-person img {
+  width: 100%;
+  aspect-ratio: 2/3;
+  object-fit: cover;
+  border-radius: 9px;
+  background: var(--panel2);
+}
+
+.cast-person strong {
+  display: block;
+  font-size: 11px;
+  margin-top: 6px;
+}
+
+.cast-person span {
+  display: block;
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.toast {
+  position: fixed;
+  bottom: 23px;
+  left: 50%;
+  z-index: 200;
+  transform: translate(-50%, 20px);
+  opacity: 0;
+  pointer-events: none;
+  background: var(--panel2);
+  border: 1px solid var(--line);
+  color: var(--text);
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-size: 12px;
+  transition: .25s;
+  box-shadow: var(--shadow);
+  max-width: 90%;
+  text-align: center;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--line);
+  border-top-color: var(--pink);
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+  margin: 35px auto;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 1150px) {
+  .movie-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .search-grid {
+    grid-template-columns: minmax(180px, 1fr) repeat(2, minmax(125px, 150px)) auto;
+  }
+  .search-grid .search-wrap {
+    grid-column: span 1;
+  }
+  .shelf {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 800px) {
+  .navbar {
+    height: 67px;
+  }
+  .nav-inner {
+    gap: 12px;
+  }
+  .logo {
+    font-size: 22px;
+  }
+  .navlinks {
+    gap: 13px;
+  }
+  .navlinks a {
+    font-size: 11px;
+  }
+  .hero {
+    min-height: 430px;
+  }
+  .hero-content {
+    padding-block: 50px;
+  }
+  .hero h1 {
+    font-size: 48px;
+  }
+  .movie-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px 11px;
+  }
+  .search-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .search-grid .search-wrap {
+    grid-column: 1/-1;
+  }
+  .search-grid .search-btn {
+    grid-column: 1/-1;
+  }
+  .search-grid .control {
+    height: 45px;
+  }
+  .search-grid .search-btn {
+    height: 45px;
+  }
+}
+
+@media (max-width: 520px) {
+  .container {
+    width: 92%;
+  }
+  .navlinks {
+    display: none;
+  }
+  .mobile-menu {
+    display: grid;
+  }
+  .nav-fav {
+    font-size: 11px;
+    padding: 8px 10px;
+  }
+  .hero {
+    min-height: 400px;
+    background-position: 58% center;
+  }
+  .hero h1 {
+    font-size: 39px;
+  }
+  .hero p {
+    font-size: 13px;
+  }
+  .section-title {
+    font-size: 21px;
+  }
+  .movie-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px 11px;
+  }
+  .movie-title {
+    font-size: 12px;
+  }
+  .movie-info {
+    padding: 10px 8px;
+  }
+  .genre-pill {
+    font-size: 9px;
+  }
+  .shelf {
+    grid-template-columns: 1fr 1fr;
+  }
+  .shelf-card {
+    padding: 15px;
+    min-height: 125px;
+  }
+  .shelf-card strong {
+    font-size: 14px;
+  }
+  .api-row {
+    flex-direction: column;
+  }
+  .api-row .btn {
+    min-height: 45px;
+  }
+  .modal {
+    padding: 10px;
+  }
+  .modal-content {
+    padding: 0 17px 22px;
+  }
+  .modal-content h2 {
+    font-size: 23px;
+  }
+  .modal-backdrop {
+    height: 210px;
+  }
+  .modal-actions .btn {
+    flex: 1;
+  }
+  .sort-wrap {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+
+/* AI assistant, language selector and creator tools */
+.top-tools{display:flex;align-items:center;gap:8px}
+.language-select{max-width:145px;height:40px;border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:10px;padding:0 9px}
+.ai-launch{position:fixed;z-index:90;bottom:22px;right:22px;border:0;border-radius:999px;padding:14px 19px;background:linear-gradient(120deg,var(--pink),var(--orange));color:#fff;font-weight:900;box-shadow:0 12px 35px #0007}
+.ai-panel{position:fixed;z-index:120;right:20px;bottom:82px;width:min(430px,calc(100vw - 24px));height:min(680px,calc(100vh - 115px));display:none;flex-direction:column;overflow:hidden;border:1px solid var(--line);border-radius:20px;background:var(--panel);box-shadow:var(--shadow)}
+.ai-panel.open{display:flex}
+.ai-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:16px;background:linear-gradient(120deg,#ff38641b,#ff80581b);border-bottom:1px solid var(--line)}
+.ai-head strong{font-size:15px}.ai-head small{display:block;color:var(--muted);font-size:11px;margin-top:3px}
+.ai-close{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:9px;width:36px;height:36px}
+.ai-modes{display:flex;gap:7px;padding:10px;overflow:auto;border-bottom:1px solid var(--line)}
+.ai-mode{white-space:nowrap;border:1px solid var(--line);border-radius:9px;background:var(--panel2);color:var(--text);padding:7px 10px;font-size:11px}
+.ai-mode.active{background:var(--pink);color:white;border-color:var(--pink)}
+.ai-messages{flex:1;overflow:auto;padding:13px;display:flex;flex-direction:column;gap:10px}
+.ai-msg{max-width:92%;padding:10px 12px;border-radius:13px;background:var(--panel2);font-size:12px;line-height:1.9;white-space:pre-wrap;overflow-wrap:anywhere}
+.ai-msg.user{align-self:flex-start;background:#ff386423;border:1px solid #ff386444}
+.ai-msg.bot{align-self:flex-end}
+.ai-msg img{max-width:100%;border-radius:10px;display:block;margin-top:8px}
+.ai-compose{padding:11px;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:8px}
+.ai-compose textarea{resize:vertical;min-height:48px;max-height:130px;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--text);font:inherit;font-size:12px}
+.ai-send{border:0;border-radius:10px;padding:0 15px;background:var(--pink);color:#fff;font-weight:800}
+.ai-hint{padding:0 12px 10px;color:var(--muted);font-size:10px;line-height:1.7}
+.creator-image{max-width:100%;border-radius:12px;margin-top:10px}
+@media(max-width:520px){.top-tools{gap:5px}.language-select{max-width:94px;font-size:11px}.ai-launch{right:12px;bottom:12px}.ai-panel{right:12px;bottom:70px}}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *:before, *:after {
+    scroll-behavior: auto!important;
+    animation-duration: .01ms!important;
+    transition-duration: .01ms!important;
+  }
+}
+</style>
+</head>
+<body>
+<header class="navbar">
+  <div class="container nav-inner">
+    <a class="logo" href="#home" aria-label="MovieHub الرئيسية">Movie<span>Hub</span> ✦</a>
+    <nav class="navlinks" aria-label="التنقل الرئيسي">
+      <a href="#home" class="active">الرئيسية</a>
+      <a href="#discover">اكتشف</a>
+      <a href="#collections">التصنيفات</a>
+      <a href="#favorites" id="navFavorites">المفضلة</a>
+    </nav>
+    <div class="nav-actions">
+      <select class="language-select" id="siteLanguage" aria-label="لغة الموقع" title="ترجمة الموقع"><option value="ar">العربية</option><option value="en">English</option><option value="fr">Français</option><option value="es">Español</option><option value="de">Deutsch</option><option value="it">Italiano</option><option value="tr">Türkçe</option><option value="ru">Русский</option><option value="pt">Português</option><option value="hi">हिन्दी</option><option value="ja">日本語</option><option value="ko">한국어</option><option value="zh-CN">中文</option></select>
+      <button class="icon-button" id="themeButton" title="تغيير المظهر" aria-label="تغيير المظهر">☼</button>
+      <button class="nav-fav" id="favoritesButton">♥ المفضلة <b id="favoritesCount">0</b></button>
+      <button class="icon-button mobile-menu" id="mobileMenu" aria-label="فتح المفضلة">☰</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="home">
+  <div class="container">
+    <div class="hero-content">
+      <span class="kicker">منصة اكتشاف الترفيه</span>
+      <h1>حكايتك الجاية<br><span class="gradient-text">هتبدأ من هنا.</span></h1>
+      <p>اكتشف أفلامك ومسلسلاتك والأنمي والكرتون المفضلين. ابحث، قارن التقييمات، شاهد التريلرات، وابنِ مكتبتك السينمائية الخاصة.</p>
+      <div class="hero-buttons">
+        <a class="btn btn-primary" href="#discover">✦ اكتشف الأعمال <span>←</span></a>
+        <button class="btn btn-secondary" id="heroFavorites">♥ مكتبتي الخاصة</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main class="container">
+  <section class="section" id="discover">
+    <div class="section-head">
+      <div>
+        <h2 class="section-title" id="catalogTitle">اكتشف الأعمال</h2>
+        <p class="section-subtitle">عالم كامل من الأفلام والمسلسلات والأنمي في مكان واحد</p>
+      </div>
+      <span class="section-count" id="catalogCount">جاري تجهيز المكتبة...</span>
+    </div>
+
+    <div class="search-panel">
+      <div class="search-grid">
+        <label class="search-wrap">
+          <span class="search-icon">⌕</span>
+          <input class="control" id="searchInput" type="search" placeholder="ابحث بالاسم: فيلم، مسلسل، أنمي..." autocomplete="off" aria-label="البحث عن عمل">
+        </label>
+        <select class="control" id="mediaFilter" aria-label="نوع العمل">
+          <option value="all">كل الأنواع</option>
+          <option value="movie">أفلام</option>
+          <option value="tv">مسلسلات وكرتون</option>
+        </select>
+        <select class="control" id="genreFilter" aria-label="التصنيف">
+          <option value="all">كل التصنيفات</option>
+          <option value="28">أكشن</option><option value="12">مغامرة</option>
+          <option value="16">أنيميشن / كرتون</option><option value="35">كوميديا</option>
+          <option value="80">جريمة</option><option value="18">دراما</option>
+          <option value="10751">عائلي</option><option value="14">فانتازيا</option>
+          <option value="27">رعب</option><option value="9648">غموض</option>
+          <option value="10749">رومانسي</option><option value="878">خيال علمي</option>
+          <option value="53">إثارة</option><option value="99">وثائقي</option>
+        </select>
+        <select class="control" id="yearFilter" aria-label="سنة الإصدار">
+          <option value="all">كل السنوات</option>
+        </select>
+        <button class="btn btn-primary search-btn" id="searchButton">⌕ بحث</button>
+      </div>
+      <div class="quick-filters" id="quickFilters">
+        <button class="chip active" data-mode="trending">🔥 الرائج</button>
+        <button class="chip" data-mode="movie">🎬 أفلام</button>
+        <button class="chip" data-mode="tv">📺 مسلسلات</button>
+        <button class="chip" data-mode="animation">🎨 أنمي وكرتون</button>
+        <button class="chip" data-mode="top">⭐ الأعلى تقييمًا</button>
+        <button class="chip" data-mode="upcoming">🆕 قريبًا</button>
+        <button class="chip" data-mode="favorites">♥ المفضلة</button>
+      </div>
+    </div>
+
+    <div class="results-bar">
+      <span id="resultsInfo" aria-live="polite">جاري تجهيز المكتبة...</span>
+      <label class="sort-wrap">ترتيب حسب
+        <select class="control" id="sortFilter" aria-label="ترتيب النتائج">
+          <option value="popular">الأكثر رواجًا</option>
+          <option value="rating">أعلى تقييم</option>
+          <option value="newest">الأحدث</option>
+          <option value="oldest">الأقدم</option>
+          <option value="az">الاسم: أ - ي</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="movie-grid" id="movieGrid" aria-live="polite"></div>
+    <div class="load-more-wrap" id="loadMoreWrap" hidden>
+      <button class="btn btn-secondary" id="loadMoreButton">عرض المزيد ↓</button>
+    </div>
+    <div class="pagination" id="pagination"></div>
+  </section>
+
+  <section class="section" id="collections">
+    <div class="section-head">
+      <div>
+        <h2 class="section-title">اكتشف حسب مزاجك</h2>
+        <p class="section-subtitle">اختار النوع اللي يناسب سهرتك</p>
+      </div>
+    </div>
+    <div class="shelf">
+      <button class="shelf-card" data-genre="28" data-icon="⚔️"><strong>أكشن ومغامرات</strong><span>مطاردات، أبطال وعوالم جديدة</span></button>
+      <button class="shelf-card" data-genre="35" data-icon="😂"><strong>كوميديا</strong><span>ضحك ومواقف لا تُنسى</span></button>
+      <button class="shelf-card" data-genre="16" data-icon="🎨"><strong>أنمي وكرتون</strong><span>حكايات مرسومة لكل الأعمار</span></button>
+      <button class="shelf-card" data-genre="878" data-icon="🚀"><strong>خيال علمي</strong><span>عوالم مستقبلية وأسرار الكون</span></button>
+      <button class="shelf-card" data-genre="18" data-icon="🎭"><strong>دراما</strong><span>قصص وشخصيات تلمس القلب</span></button>
+      <button class="shelf-card" data-genre="27" data-icon="👻"><strong>رعب وغموض</strong><span>للي يحبوا الإثارة والتشويق</span></button>
+      <button class="shelf-card" data-genre="10751" data-icon="🍿"><strong>عائلي</strong><span>اختيارات مناسبة لوقت العيلة</span></button>
+      <button class="shelf-card" data-genre="10749" data-icon="💌"><strong>رومانسي</strong><span>قصص حب ومشاعر مختلفة</span></button>
+    </div>
+  </section>
+
+  <section class="api-panel" id="apiPanel">
+    <h3>🌐 افتح المكتبة العالمية</h3>
+    <p>الموقع يحتوي على مكتبة تجريبية للعمل دون إعدادات. للبحث في قاعدة TMDB عن ملايين سجلات الأفلام والمسلسلات والحصول على صور ومعلومات وتريلرات وممثلين، أضف TMDB API Read Access Token. أنشئ المفتاح من حسابك الرسمي، ولا تنشر رمزك في موقع عام دون خادم خلفي.</p>
+    <div class="api-row">
+      <input class="control" id="apiKeyInput" type="password" placeholder="TMDB API Read Access Token" autocomplete="off" aria-label="مفتاح TMDB">
+      <button class="btn btn-primary" id="connectButton">حفظ وربط المكتبة</button>
+      <button class="btn btn-secondary" id="disconnectButton">فصل</button>
+    </div>
+    <div class="status" id="apiStatus" role="status">المكتبة التجريبية جاهزة.</div>
+    <p class="note">الحصول على مفتاح API: <a href="https://www.themoviedb.org/settings/api" target="_blank" rel="noopener" style="color:var(--pink)">TMDB API Settings ↗</a> — توثيق: <a href="https://developer.themoviedb.org/docs" target="_blank" rel="noopener" style="color:var(--pink)">Developer Docs ↗</a>.</p>
+  </section>
+</main>
+
+<div id="google_translate_element" style="position:absolute;left:-9999px;top:-9999px" aria-hidden="true"></div>
+<footer>
+  <div class="container">
+    <strong>MovieHub</strong> — اكتشف حكاية جديدة كل يوم 🎬
+    <p>بيانات الأعمال والصور عند الاتصال مقدمة من TMDB. هذا الموقع غير تابع لـ TMDB.</p>
+  </div>
+</footer>
+
+<div class="modal" id="detailsModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-box">
+    <button class="modal-close" id="closeModal" aria-label="إغلاق">×</button>
+    <div class="modal-backdrop"><img id="modalBackdrop" alt=""></div>
+    <div class="modal-content">
+      <h2 id="modalTitle">تفاصيل العمل</h2>
+      <div class="modal-meta" id="modalMeta"></div>
+      <p class="modal-overview" id="modalOverview"></p>
+      <h3 id="castHeading" hidden>أبرز الممثلين</h3>
+      <div class="cast-list" id="castList"></div>
+      <div class="modal-actions">
+        <button class="btn btn-primary" id="modalFavorite">♥ أضف للمفضلة</button>
+        <button class="btn btn-secondary" id="trailerButton">▶ مشاهدة التريلر</button>
+        <a class="btn btn-secondary" id="externalLink" href="#" target="_blank" rel="noopener">تفاصيل أكثر ↗</a>
+      </div>
+      <div id="trailerContainer"></div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<button class="ai-launch" id="aiLaunch" aria-expanded="false">✦ مساعد MovieHub AI</button>
+<aside class="ai-panel" id="aiPanel" aria-label="مساعد الذكاء الاصطناعي">
+  <div class="ai-head"><div><strong>✦ MovieHub AI</strong><small>اسأل عن الموقع، اصنع صورة، أو اطلب كودًا</small></div><button class="ai-close" id="aiClose" aria-label="إغلاق">×</button></div>
+  <div class="ai-modes" role="group" aria-label="نوع المساعدة">
+    <button class="ai-mode active" data-ai-mode="chat">💬 اسألني</button>
+    <button class="ai-mode" data-ai-mode="image">🎨 اصنع صورة</button>
+    <button class="ai-mode" data-ai-mode="code">💻 كود موقع</button>
+  </div>
+  <div class="ai-messages" id="aiMessages" aria-live="polite"><div class="ai-msg bot">أهلًا! أنا مساعد MovieHub. أقدر أشرح لك أي جزء في الموقع، أساعدك في تصميم صورة، أو أكتب لك كود موقع سينما. اكتب طلبك بالأسفل.</div></div>
+  <div class="ai-hint" id="aiHint">اسأل عن البحث، الأفلام، التصنيفات، أو طريقة تطوير الموقع.</div>
+  <form class="ai-compose" id="aiForm"><textarea id="aiPrompt" required placeholder="اكتب سؤالك هنا..." rows="2"></textarea><button class="ai-send" id="aiSend" type="submit">إرسال</button></form>
+</aside>
+
+<script>
+"use strict";
+
+const CONFIG = Object.freeze({
+  apiBase: "https://api.themoviedb.org/3",
+  imageBase: "https://image.tmdb.org/t/p/",
+  placeholder: "https://placehold.co/400x600/191e2e/ffffff?text=MovieHub",
+  backdropPlaceholder: "https://placehold.co/1280x720/111522/ffffff?text=MovieHub",
+  favoritesKey: "moviehub_favorites_v3",
+  themeKey: "moviehub_theme_v1",
+  perPage: 20,
+  maxApiPages: 500,
+  requestTimeout: 18000
+});
+
+const GENRES = Object.freeze({
+  28:"أكشن",12:"مغامرة",16:"أنيميشن",35:"كوميديا",80:"جريمة",
+  99:"وثائقي",18:"دراما",10751:"عائلي",14:"فانتازيا",36:"تاريخي",
+  27:"رعب",10402:"موسيقى",9648:"غموض",10749:"رومانسي",878:"خيال علمي",
+  10770:"تلفزيوني",53:"إثارة",10752:"حربي",37:"ويسترن",
+  10759:"أكشن ومغامرة",10762:"أطفال",10763:"أخبار",10764:"واقعي",
+  10765:"خيال علمي وفانتازيا",10766:"دراما تلفزيونية",10767:"حوارات",
+  10768:"سياسة وحرب"
+});
+
+const DEMO_CATALOG = [
+  {id:1,title:"Inception",year:2010,rating:8.4,type:"movie",genres:[28,878],poster:"https://image.tmdb.org/t/p/w500/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg",overview:"لص محترف يتسلل إلى الأحلام لسرقة الأسرار، لكنه يحصل على مهمة أصعب من أي شيء واجهه من قبل."},
+  {id:2,title:"Interstellar",year:2014,rating:8.7,type:"movie",genres:[12,18,878],poster:"https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg",overview:"رحلة استثنائية عبر الفضاء بحثًا عن مستقبل للبشرية."},
+  {id:3,title:"The Dark Knight",year:2008,rating:9.0,type:"movie",genres:[28,80,18],poster:"https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg",overview:"يواجه باتمان أخطر خصم في مدينة جوثام في صراع يختبر معنى العدالة."},
+  {id:4,title:"Avatar",year:2009,rating:7.9,type:"movie",genres:[28,12,14],poster:"https://image.tmdb.org/t/p/w500/kyeqWdyUXW608qlYkRqosgbbJyK.jpg",overview:"رحلة إلى عالم باندورا المذهل، حيث يواجه جندي سابق اختيارًا يغير حياته."},
+  {id:5,title:"The Lion King",year:2019,rating:6.8,type:"movie",genres:[12,16,10751],poster:"https://image.tmdb.org/t/p/w500/dzBtMocZuJbjLOXvrl4zGYigDzh.jpg",overview:"رحلة سيمبا لاستعادة مكانه في دائرة الحياة واكتشاف معنى الشجاعة والعائلة."},
+  {id:6,title:"Spider-Man: No Way Home",year:2021,rating:8.0,type:"movie",genres:[28,12,878],poster:"https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg",overview:"تتعقد حياة بيتر باركر بعد انكشاف هويته، فتأخذه مغامرة إلى عوالم غير متوقعة."},
+  {id:7,title:"Breaking Bad",year:2008,rating:9.5,type:"tv",genres:[18,80],poster:"https://image.tmdb.org/t/p/w500/ggFHVNu6YYI5L9pCfOacjizRGt.jpg",overview:"مدرس كيمياء يقرر دخول عالم الجريمة في محاولة لتأمين مستقبل أسرته."},
+  {id:8,title:"Stranger Things",year:2016,rating:8.6,type:"tv",genres:[18,9648,878],poster:"https://image.tmdb.org/t/p/w500/uOOtwVbSr4QDjAGIifLDwpb2Pdl.jpg",overview:"مجموعة أصدقاء يكتشفون أسرارًا خارقة للطبيعة في بلدتهم الصغيرة."},
+  {id:9,title:"Wednesday",year:2022,rating:8.4,type:"tv",genres:[10765,9648,35],poster:"https://image.tmdb.org/t/p/w500/9PFonBhy4cQy7Jz20NpMygczOkv.jpg",overview:"وينزداي آدامز تحقق في أسرار غامضة داخل أكاديمية مليئة بالشخصيات الغريبة."},
+  {id:10,title:"Game of Thrones",year:2011,rating:8.5,type:"tv",genres:[18,10765,10759],poster:"https://image.tmdb.org/t/p/w500/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg",overview:"ممالك متنافسة تخوض صراعًا ملحميًا على العرش وسط أسرار وسحر قديم."},
+  {id:11,title:"One Piece",year:1999,rating:8.7,type:"tv",genres:[10759,35,16],poster:"https://image.tmdb.org/t/p/w500/cMD9Ygz11zjJzAovURpO75Qg7rT.jpg",overview:"لوفي وطاقمه ينطلقون في مغامرة بحرية للعثور على الكنز الأسطوري."},
+  {id:12,title:"Demon Slayer",year:2019,rating:8.6,type:"tv",genres:[16,10759,14],poster:"https://image.tmdb.org/t/p/w500/xUfRZu2mi8jH6SzQEJGP6tjBuYj.jpg",overview:"تانجيرو يبدأ رحلة خطيرة لإنقاذ أخته ومواجهة الشياطين."},
+  {id:13,title:"The Super Mario Bros. Movie",year:2023,rating:7.6,type:"movie",genres:[16,12,10751],poster:"https://image.tmdb.org/t/p/w500/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg",overview:"ماريو ولويجي يدخلان عالمًا مليئًا بالمغامرات والألوان."},
+  {id:14,title:"Toy Story",year:1995,rating:8.2,type:"movie",genres:[16,12,10751],poster:"https://image.tmdb.org/t/p/w500/uXDfjJbdP4ijW5hWSBrPrlKpxab.jpg",overview:"الألعاب تكتشف معنى الصداقة والمغامرة عندما لا يراها البشر."},
+  {id:15,title:"Coco",year:2017,rating:8.4,type:"movie",genres:[16,12,10751],poster:"https://image.tmdb.org/t/p/w500/gGEsBPAijhVUFoiNpgZXqRVWJt2.jpg",overview:"طفل عاشق للموسيقى ينطلق في رحلة سحرية لاكتشاف تاريخ عائلته."},
+  {id:16,title:"Finding Nemo",year:2003,rating:8.2,type:"movie",genres:[16,12,10751],poster:"https://image.tmdb.org/t/p/w500/eHuGQ10FUzK1mdOY69wF5pGgEf5.jpg",overview:"سمكة أب تخوض رحلة طويلة في المحيط بحثًا عن ابنه المفقود."},
+  {id:17,title:"The Office",year:2005,rating:9.0,type:"tv",genres:[35],poster:"https://image.tmdb.org/t/p/w500/qWnJzyZhyy74gjpSjIXWmuk0ifX.jpg",overview:"مواقف كوميدية يومية داخل مكتب مليء بالشخصيات غير التقليدية."},
+  {id:18,title:"Sherlock",year:2010,rating:9.1,type:"tv",genres:[80,18,9648],poster:"https://image.tmdb.org/t/p/w500/7WTsnHkbA0FaG6R9twfFde0I9hl.jpg",overview:"المحقق شيرلوك هولمز يحل أعقد الألغاز بذكاء استثنائي."},
+  {id:19,title:"The Matrix",year:1999,rating:8.2,type:"movie",genres:[28,878],poster:"https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg",overview:"مبرمج يكتشف أن الواقع الذي يعرفه ليس كما يبدو."},
+  {id:20,title:"Pulp Fiction",year:1994,rating:8.5,type:"movie",genres:[53,80],poster:"https://image.tmdb.org/t/p/w500/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg",overview:"قصص متشابكة عن الجريمة والصدفة في لوس أنجلوس."},
+  {id:21,title:"Parasite",year:2019,rating:8.5,type:"movie",genres:[53,18,35],poster:"https://image.tmdb.org/t/p/w500/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg",overview:"تتقاطع حياة عائلتين من طبقتين مختلفتين في أحداث غير متوقعة."},
+  {id:22,title:"Joker",year:2019,rating:8.2,type:"movie",genres:[80,18,53],poster:"https://image.tmdb.org/t/p/w500/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg",overview:"رجل مهمش يواجه مدينة لا ترحمه، في رحلة نفسية مظلمة."},
+  {id:23,title:"The Shawshank Redemption",year:1994,rating:8.7,type:"movie",genres:[18,80],poster:"https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg",overview:"صداقة وأمل ينموان خلف أسوار السجن عبر سنوات طويلة."},
+  {id:24,title:"Forrest Gump",year:1994,rating:8.5,type:"movie",genres:[35,18,10749],poster:"https://image.tmdb.org/t/p/w500/arw2vcBveWOVZr6pxd9XTd1TdQa.jpg",overview:"رجل طيب القلب يمر بأحداث تاريخية وحياتية استثنائية."},
+  {id:25,title:"Titanic",year:1997,rating:7.9,type:"movie",genres:[18,10749],poster:"https://image.tmdb.org/t/p/w500/9xjZS2rlVxm8SFx8kPC3aIGCOYQ.jpg",overview:"قصة حب على متن سفينة شهيرة تواجه كارثة بحرية."},
+  {id:26,title:"Harry Potter and the Philosopher's Stone",year:2001,rating:7.9,type:"movie",genres:[12,14],poster:"https://image.tmdb.org/t/p/w500/wuMc08IPKEatf9rnMNXvIDxqP4W.jpg",overview:"صبي يكتشف أنه ساحر ويلتحق بمدرسة هوجورتس."},
+  {id:27,title:"The Lord of the Rings: The Fellowship of the Ring",year:2001,rating:8.4,type:"movie",genres:[12,14],poster:"https://image.tmdb.org/t/p/w500/6oom5QYQ2yQTMJIbnvbkBL9cHo6.jpg",overview:"رفاق ينطلقون في رحلة خطرة لتدمير خاتم ذي قوة هائلة."},
+  {id:28,title:"Avengers: Endgame",year:2019,rating:8.3,type:"movie",genres:[12,878,28],poster:"https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg",overview:"الأبطال يجتمعون في محاولة أخيرة لإعادة التوازن إلى الكون."},
+  {id:29,title:"Black Panther",year:2018,rating:7.4,type:"movie",genres:[28,12,878],poster:"https://image.tmdb.org/t/p/w500/uxzzxijgPIY7slzFvMotPv8wjKA.jpg",overview:"ملك واكاندا يدافع عن شعبه ويواجه تحديًا يهدد مملكته."},
+  {id:30,title:"Frozen",year:2013,rating:7.2,type:"movie",genres:[16,12,10751],poster:"https://image.tmdb.org/t/p/w500/mINJaa34MtknCYl5AjtNJzWj8cD.jpg",overview:"أختان تخوضان مغامرة سحرية وسط الثلوج لاكتشاف قوة الحب."},
+  {id:31,title:"Inside Out",year:2015,rating:7.9,type:"movie",genres:[16,10751,35],poster:"https://image.tmdb.org/t/p/w500/2H1TmgdfNtsKlU9jKdeNyYL5y8T.jpg",overview:"مشاعر فتاة صغيرة تحاول مساعدتها في التكيف مع تغيرات الحياة."},
+  {id:32,title:"Up",year:2009,rating:8.0,type:"movie",genres:[16,35,12],poster:"https://image.tmdb.org/t/p/w500/vpbaStTMt8qqXaEgnOR2EE4DNJk.jpg",overview:"رجل مسن يحقق حلمًا قديمًا برحلة جوية غير عادية."},
+  {id:33,title:"Spirited Away",year:2001,rating:8.5,type:"movie",genres:[16,14,12],poster:"https://image.tmdb.org/t/p/w500/39wmItIWsg5sZMyRUHLkWBcuVCM.jpg",overview:"فتاة تدخل عالمًا سحريًا وتحاول إنقاذ والديها والعودة إلى بيتها."},
+  {id:34,title:"Your Name",year:2016,rating:8.5,type:"movie",genres:[16,10749,18],poster:"https://image.tmdb.org/t/p/w500/q719jXXEzOoYaps6babgknONONX.jpg",overview:"مراهقان يكتشفان رابطًا غريبًا يتجاوز المسافة والزمن."},
+  {id:35,title:"Attack on Titan",year:2013,rating:9.1,type:"tv",genres:[16,10759,18],poster:"https://image.tmdb.org/t/p/w500/hTP1DtLGFamjfu8WqjnuQdP1n4i.jpg",overview:"البشر يقاتلون للبقاء خلف أسوار تحميهم من عمالقة غامضين."},
+  {id:36,title:"Naruto",year:2002,rating:8.4,type:"tv",genres:[16,10759,35],poster:"https://image.tmdb.org/t/p/w500/rgHUY8fZ0q6vW2f4o7jN5gJ5w1.jpg",overview:"نينجا شاب يسعى لتحقيق حلمه وإثبات قدراته لأهل قريته."},
+  {id:37,title:"Fullmetal Alchemist: Brotherhood",year:2009,rating:9.1,type:"tv",genres:[16,10759,14],poster:"https://image.tmdb.org/t/p/w500/5ZFUEOULaVml7pQuXxhpR2SmVUw.jpg",overview:"أخوان يبحثان عن حجر الفيلسوف لاستعادة ما فقداه."},
+  {id:38,title:"Death Note",year:2006,rating:8.6,type:"tv",genres:[16,9648,18],poster:"https://image.tmdb.org/t/p/w500/tCZFfYTIwrR7n94J6G14Y4hAFU6.jpg",overview:"طالب يجد دفترًا خارقًا يثير صراعًا أخلاقيًا وتحقيقًا معقدًا."},
+  {id:39,title:"Bluey",year:2018,rating:9.5,type:"tv",genres:[16,10751,35],poster:"https://image.tmdb.org/t/p/w500/2WqY8Zk6xKfNQ3s4n9p0z9d2p1.jpg",overview:"جرو صغير وعائلته يحولون المواقف اليومية إلى ألعاب ومغامرات."},
+  {id:40,title:"Rick and Morty",year:2013,rating:8.7,type:"tv",genres:[16,35,878],poster:"https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg",overview:"عالم غريب ومغامرات عبر الأكوان مع عالم عبقري وحفيده."},
+  {id:41,title:"Arcane",year:2021,rating:9.0,type:"tv",genres:[16,18,878],poster:"https://image.tmdb.org/t/p/w500/fqldf2t8ztc9aiwn3k6mlX3tvRT.jpg",overview:"أختان تجد كل منهما نفسها في جانب مختلف من صراع بين مدينتين."},
+  {id:42,title:"Blue Eye Samurai",year:2023,rating:8.7,type:"tv",genres:[16,18,10759],poster:"https://image.tmdb.org/t/p/w500/9xY2zv5QYp8L7d3n3v8q9k4r5T.jpg",overview:"محاربة تخوض رحلة انتقام في اليابان خلال حقبة إيدو."},
+  {id:43,title:"The Last of Us",year:2023,rating:8.6,type:"tv",genres:[18,10759,878],poster:"https://image.tmdb.org/t/p/w500/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg",overview:"رجل وفتاة يعبران عالمًا قاسيًا بعد انهيار الحضارة."},
+  {id:44,title:"The Mandalorian",year:2019,rating:8.4,type:"tv",genres:[10759,878],poster:"https://image.tmdb.org/t/p/w500/eU1i6eHXlzMOlEq0ku1Rzq7Y4wA.jpg",overview:"محارب منفرد يجوب المجرة في مغامرات بعيدة عن مركز السلطة."},
+  {id:45,title:"Friends",year:1994,rating:8.4,type:"tv",genres:[35,10749],poster:"https://image.tmdb.org/t/p/w500/2koX1xLkpTQM4IZebYvKysFW1Nh.jpg",overview:"ستة أصدقاء يواجهون الحياة والحب والعمل في نيويورك."},
+  {id:46,title:"The Boys",year:2019,rating:8.5,type:"tv",genres:[10759,35,878],poster:"https://image.tmdb.org/t/p/w500/stTEycfG9928HYGEISBFaG1ngjM.jpg",overview:"مجموعة تحاول كشف فساد أبطال خارقين مشهورين."},
+  {id:47,title:"Squid Game",year:2021,rating:7.8,type:"tv",genres:[18,9648,28],poster:"https://image.tmdb.org/t/p/w500/dDlEmu3EZ0Pgg93K2SVNLCjCSvE.jpg",overview:"متسابقون يخاطرون بحياتهم في ألعاب غامضة مقابل جائزة ضخمة."},
+  {id:48,title:"Peaky Blinders",year:2013,rating:8.5,type:"tv",genres:[18,80],poster:"https://image.tmdb.org/t/p/w500/vUUqzWa2LnHIVqkaKVlVGkVcZIW.jpg",overview:"عائلة إجرامية تصعد في بريطانيا بعد الحرب العالمية الأولى."},
+  {id:49,title:"The Walking Dead",year:2010,rating:8.1,type:"tv",genres:[10759,18,878],poster:"https://image.tmdb.org/t/p/w500/xf9wuDcqlUPWABZNeDKPbZUjWx0.jpg",overview:"ناجون يحاولون إعادة بناء حياتهم وسط عالم يسيطر عليه الموتى الأحياء."},
+  {id:50,title:"Loki",year:2021,rating:8.2,type:"tv",genres:[18,10765,10759],poster:"https://image.tmdb.org/t/p/w500/kEl2t3OhXc3Zb9FBh1AuYzRTgZp.jpg",overview:"إله الخداع يتورط في مغامرة عبر الزمن والواقع."},
+  {id:51,title:"The Batman",year:2022,rating:7.7,type:"movie",genres:[80,9648,28],poster:"https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg",overview:"المحقق المقنع يطارد قاتلًا غامضًا يكشف فساد جوثام."},
+  {id:52,title:"Dune",year:2021,rating:7.8,type:"movie",genres:[878,12],poster:"https://image.tmdb.org/t/p/w500/d5NXSklXo0qyIYkgV94XAgMIckC.jpg",overview:"شاب يواجه قدره على كوكب صحراوي تشتعل حوله صراعات سياسية."},
+  {id:53,title:"Oppenheimer",year:2023,rating:8.1,type:"movie",genres:[18,36],poster:"https://image.tmdb.org/t/p/w500/ptpr0kGAckfQkJeJIt8st5dglvd.jpg",overview:"دراما تاريخية عن العالم الذي قاد مشروع تطوير القنبلة الذرية."},
+  {id:54,title:"Barbie",year:2023,rating:7.0,type:"movie",genres:[35,12,14],poster:"https://image.tmdb.org/t/p/w500/iuFNMS8U5cb6xfzi51Dbkovj7vM.jpg",overview:"رحلة من عالم باربي الوردي إلى العالم الحقيقي وأسئلته."},
+  {id:55,title:"John Wick",year:2014,rating:7.4,type:"movie",genres:[28,53],poster:"https://image.tmdb.org/t/p/w500/fZPSd91yGE9fCcCe6OoQr6E3Bev.jpg",overview:"قاتل محترف يعود إلى عالمه السابق بعد خسارة شخصية."},
+  {id:56,title:"Gladiator",year:2000,rating:8.2,type:"movie",genres:[28,18,12],poster:"https://image.tmdb.org/t/p/w500/ty8TGRuvJLPUmAR1H1nRIsgwvim.jpg",overview:"قائد روماني يسعى للانتقام واستعادة كرامته."},
+  {id:57,title:"The Prestige",year:2006,rating:8.2,type:"movie",genres:[18,9648,878],poster:"https://image.tmdb.org/t/p/w500/5MXyQfz8xUP3dIFPTubhTsbFY6N.jpg",overview:"منافَسة بين ساحرين تتحول إلى هوس خطير بالأسرار."},
+  {id:58,title:"Whiplash",year:2014,rating:8.4,type:"movie",genres:[18,10402],poster:"https://image.tmdb.org/t/p/w500/7fn624j5lj3xTme2SgiLCeuedmO.jpg",overview:"عازف شاب يواجه مدربًا قاسيًا في سعيه نحو التميز الموسيقي."},
+  {id:59,title:"WALL·E",year:2008,rating:8.1,type:"movie",genres:[16,878,10751],poster:"https://image.tmdb.org/t/p/w500/hbhFnRzzg6ZDmm8YAmxBnQpQIPh.jpg",overview:"روبوت صغير يكتشف معنى الحب والأمل في مستقبل مهجور."},
+  {id:60,title:"Kung Fu Panda",year:2008,rating:7.6,type:"movie",genres:[16,28,10751],poster:"https://image.tmdb.org/t/p/w500/wWt4JYXTg5Wr3xBW2phBrMKgp3x.jpg",overview:"باندا محب للطعام يكتشف أنه قد يكون محارب التنين المنتظر."}
+];
+
+/* DOM references are collected once to keep event handlers consistent. */
+const DOM = {
+  grid: document.getElementById("movieGrid"),
+  search: document.getElementById("searchInput"),
+  media: document.getElementById("mediaFilter"),
+  genre: document.getElementById("genreFilter"),
+  year: document.getElementById("yearFilter"),
+  sort: document.getElementById("sortFilter"),
+  info: document.getElementById("resultsInfo"),
+  count: document.getElementById("catalogCount"),
+  title: document.getElementById("catalogTitle"),
+  loadWrap: document.getElementById("loadMoreWrap"),
+  loadButton: document.getElementById("loadMoreButton"),
+  pagination: document.getElementById("pagination"),
+  modal: document.getElementById("detailsModal"),
+  modalTitle: document.getElementById("modalTitle"),
+  modalBackdrop: document.getElementById("modalBackdrop"),
+  modalMeta: document.getElementById("modalMeta"),
+  modalOverview: document.getElementById("modalOverview"),
+  modalFavorite: document.getElementById("modalFavorite"),
+  trailerButton: document.getElementById("trailerButton"),
+  trailerContainer: document.getElementById("trailerContainer"),
+  castHeading: document.getElementById("castHeading"),
+  castList: document.getElementById("castList"),
+  externalLink: document.getElementById("externalLink"),
+  apiInput: document.getElementById("apiKeyInput"),
+  apiStatus: document.getElementById("apiStatus"),
+  toast: document.getElementById("toast")
+};
+
+const state = {
+  library: DEMO_CATALOG.map(item => ({...item})),
+  favorites: readFavorites(),
+  mode: "trending",
+  page: 1,
+  totalPages: 1,
+  totalResults: DEMO_CATALOG.length,
+  visibleItems: [],
+  currentItem: null,
+  apiKey: "",
+  requestId: 0,
+  searchTimer: null,
+  toastTimer: null,
+  loading: false,
+  lastFocus: null,
+  theme: "dark"
+};
+
+function safeRead(key, fallback) {
+  try {
+    const value = localStorage.getItem(key);
+    return value ? JSON.parse(value) : fallback;
+  } catch (error) {
+    return fallback;
+  }
+}
+
+function readFavorites() {
+  const parsed = safeRead(CONFIG.favoritesKey, []);
+  return Array.isArray(parsed) ? parsed : [];
+}
+
+function writeFavorites() {
+  try {
+    localStorage.setItem(CONFIG.favoritesKey, JSON.stringify(state.favorites));
+  } catch (error) {
+    notify("تعذر حفظ المفضلة. تحقق من مساحة التخزين في المتصفح.");
+  }
+  updateFavoritesCount();
+}
+
+function updateFavoritesCount() {
+  document.getElementById("favoritesCount").textContent = String(state.favorites.length);
+}
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, character => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  })[character]);
+}
+
+function safeImage(value, fallback = CONFIG.placeholder) {
+  if (!value || typeof value !== "string") return fallback;
+  if (/^https:\/\/image\.tmdb\.org\/t\/p\//.test(value)) return value;
+  if (/^https:\/\/placehold\.co\//.test(value)) return value;
+  if (/^https:\/\/.+/i.test(value)) return value;
+  return fallback;
+}
+
+function normalizeItem(raw) {
+  const mediaType = raw.media_type || raw.mediaType ||
+    (raw.type === "tv" ? "tv" : (raw.name && !raw.title ? "tv" : "movie"));
+  const tv = mediaType === "tv";
+  const release = raw.release_date || raw.first_air_date || "";
+  const posterPath = raw.poster_path || raw.poster || "";
+  const backdropPath = raw.backdrop_path || raw.backdrop || "";
+  const poster = posterPath
+    ? (posterPath.startsWith("http") ? posterPath : CONFIG.imageBase + "w500" + posterPath)
+    : CONFIG.placeholder;
+  const backdrop = backdropPath
+    ? (backdropPath.startsWith("http") ? backdropPath : CONFIG.imageBase + "w1280" + backdropPath)
+    : CONFIG.backdropPlaceholder;
+  return {
+    id: raw.id,
+    title: raw.title || raw.name || "بدون عنوان",
+    originalTitle: raw.original_title || raw.original_name || "",
+    year: release ? release.slice(0, 4) : (raw.year || "غير معروف"),
+    releaseDate: release,
+    rating: Number(raw.vote_average ?? raw.rating ?? 0),
+    voteCount: Number(raw.vote_count || 0),
+    type: tv ? "tv" : "movie",
+    mediaType: tv ? "tv" : "movie",
+    genres: raw.genre_ids || raw.genres?.map(genre => genre.id) || [],
+    poster: safeImage(poster),
+    backdrop: safeImage(backdrop, CONFIG.backdropPlaceholder),
+    overview: raw.overview || "لا يتوفر وصف لهذا العمل حاليًا.",
+    popularity: Number(raw.popularity || 0),
+    externalId: raw.id,
+    runtime: raw.runtime || null,
+    tagline: raw.tagline || "",
+    originalLanguage: raw.original_language || "",
+    originCountry: raw.origin_country || [],
+    status: raw.status || ""
+  };
+}
+
+function itemKey(item) {
+  return `${item.type}:${item.id}`;
+}
+
+function isFavorite(item) {
+  return state.favorites.some(favorite => itemKey(favorite) === itemKey(item));
+}
+
+function genreLabel(item) {
+  const id = Array.isArray(item.genres) ? item.genres[0] : null;
+  return GENRES[id] || (item.type === "tv" ? "مسلسلات" : "أفلام");
+}
+
+function typeLabel(item) {
+  return item.type === "tv" ? "مسلسل / كرتون" : "فيلم";
+}
+
+function notify(message) {
+  DOM.toast.textContent = message;
+  DOM.toast.classList.add("show");
+  clearTimeout(state.toastTimer);
+  state.toastTimer = setTimeout(() => DOM.toast.classList.remove("show"), 2600);
+}
+
+function setStatus(message, error = false) {
+  DOM.apiStatus.textContent = message;
+  DOM.apiStatus.style.color = error ? "#ff8198" : "var(--green)";
+}
+
+function updateQuickButtons() {
+  document.querySelectorAll("[data-mode]").forEach(button => {
+    button.classList.toggle("active", button.dataset.mode === state.mode);
+  });
+}
+
+function setMode(mode) {
+  state.mode = mode;
+  state.page = 1;
+  updateQuickButtons();
+  DOM.title.textContent = mode === "favorites" ? "أعمالي المفضلة" : "اكتشف الأعمال";
+  if (state.apiKey && mode !== "favorites") {
+    fetchRemote();
+  } else {
+    renderFilteredLocal();
+  }
+}
+
+function getLocalFilteredItems() {
+  const query = DOM.search.value.trim().toLocaleLowerCase();
+  const media = DOM.media.value;
+  const genre = DOM.genre.value;
+  const year = DOM.year.value;
+  let source = state.mode === "favorites" ? state.favorites : state.library;
+
+  let items = source.filter(item => {
+    if (query && !item.title.toLocaleLowerCase().includes(query) &&
+        !String(item.originalTitle || "").toLocaleLowerCase().includes(query)) return false;
+    if (media !== "all" && item.type !== media) return false;
+    if (genre !== "all" && !(item.genres || []).includes(Number(genre))) return false;
+    if (year !== "all" && String(item.year) !== year) return false;
+    if (state.mode === "movie" && item.type !== "movie") return false;
+    if (state.mode === "tv" && item.type !== "tv") return false;
+    if (state.mode === "animation" && !(item.genres || []).includes(16)) return false;
+    if (state.mode === "upcoming" && item.releaseDate && item.releaseDate <= new Date().toISOString().slice(0, 10)) return false;
+    return true;
+  });
+
+  const sort = DOM.sort.value;
+  items = [...items];
+  if (sort === "rating") items.sort((a, b) => b.rating - a.rating);
+  if (sort === "newest") items.sort((a, b) => Number(b.year) - Number(a.year));
+  if (sort === "oldest") items.sort((a, b) => Number(a.year) - Number(b.year));
+  if (sort === "az") items.sort((a, b) => a.title.localeCompare(b.title));
+  if (sort === "popular") items.sort((a, b) => (b.popularity || b.rating) - (a.popularity || a.rating));
+  return items;
+}
+
+function renderFilteredLocal() {
+  const all = getLocalFilteredItems();
+  state.totalResults = all.length;
+  state.totalPages = Math.max(1, Math.ceil(all.length / CONFIG.perPage));
+  const start = (state.page - 1) * CONFIG.perPage;
+  const pageItems = all.slice(start, start + CONFIG.perPage);
+  renderCards(pageItems);
+  DOM.info.textContent = `عرض ${pageItems.length} من ${all.length} عمل`;
+  DOM.count.textContent = `${all.length} نتيجة`;
+  DOM.loadWrap.hidden = true;
+  renderPagination(state.totalPages);
+}
+
+function renderCards(items) {
+  state.visibleItems = items;
+  if (!items.length) {
+    DOM.grid.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">🔎</div>
+        <h3>${state.mode === "favorites" ? "لسه مفيش مفضلة" : "ملقيناش نتائج!"}</h3>
+        <p>${state.mode === "favorites" ? "اضغط على القلب في أي عمل عشان تضيفه لمكتبتك." : "جرّب كلمة بحث مختلفة أو غيّر الفلاتر."}</p>
+        <button class="btn btn-primary" id="emptyReset">${state.mode === "favorites" ? "اكتشف الأعمال" : "إعادة ضبط البحث"}</button>
+      </div>`;
+    document.getElementById("emptyReset").addEventListener("click", () => {
+      if (state.mode === "favorites") setMode("trending");
+      else resetFilters();
+    });
+    return;
+  }
+
+  DOM.grid.innerHTML = items.map((item, index) => `
+    <article class="movie-card" data-key="${escapeHTML(itemKey(item))}" style="animation-delay:${Math.min(index * 20, 220)}ms">
+      <div class="poster">
+        <img src="${escapeHTML(item.poster)}" alt="${escapeHTML(item.title)}" loading="lazy">
+        <span class="poster-tag">${escapeHTML(typeLabel(item))}</span>
+        <button class="fav-toggle ${isFavorite(item) ? "saved" : ""}" data-action="favorite" aria-label="${isFavorite(item) ? "إزالة من المفضلة" : "إضافة إلى المفضلة"}">${isFavorite(item) ? "♥" : "♡"}</button>
+        <div class="rating"><span>★</span> ${Number(item.rating || 0).toFixed(1)}</div>
+      </div>
+      <div class="movie-info">
+        <h3 class="movie-title" title="${escapeHTML(item.title)}">${escapeHTML(item.title)}</h3>
+        <div class="movie-meta">
+          <span class="movie-year">${escapeHTML(String(item.year))}</span>
+          <span class="genre-pill">${escapeHTML(genreLabel(item))}</span>
+        </div>
+        <button class="details-button" data-action="details">عرض التفاصيل ←</button>
+      </div>
+    </article>`).join("");
+
+  DOM.grid.querySelectorAll(".movie-card").forEach(card => {
+    const item = items.find(candidate => itemKey(candidate) === card.dataset.key);
+    card.addEventListener("click", event => {
+      const action = event.target.closest("[data-action]")?.dataset.action;
+      if (action === "favorite") {
+        event.stopPropagation();
+        toggleFavorite(item);
+        return;
+      }
+      openDetails(item);
+    });
+    const image = card.querySelector("img");
+    image.addEventListener("error", () => {
+      image.src = CONFIG.placeholder;
+    }, {once:true});
+  });
+}
+
+function renderPagination(totalPages) {
+  DOM.pagination.innerHTML = "";
+  if (state.apiKey || totalPages <= 1) return;
+  const current = state.page;
+  const pages = new Set([1, totalPages, current, current - 1, current + 1]);
+  [...pages].filter(page => page >= 1 && page <= totalPages).sort((a, b) => a - b).forEach(page => {
+    const button = document.createElement("button");
+    button.className = "page-button" + (page === current ? " active" : "");
+    button.textContent = String(page);
+    button.setAttribute("aria-label", `الصفحة ${page}`);
+    button.addEventListener("click", () => {
+      state.page = page;
+      renderFilteredLocal();
+      document.getElementById("discover").scrollIntoView({behavior:"smooth"});
+    });
+    DOM.pagination.appendChild(button);
+  });
+}
+
+function toggleFavorite(item) {
+  if (!item) return;
+  if (isFavorite(item)) {
+    state.favorites = state.favorites.filter(favorite => itemKey(favorite) !== itemKey(item));
+    notify("تمت إزالة العمل من المفضلة");
+  } else {
+    state.favorites.unshift(item);
+    notify("♥ تمت الإضافة إلى المفضلة");
+  }
+  writeFavorites();
+  if (state.currentItem && itemKey(state.currentItem) === itemKey(item)) updateModalFavorite();
+  if (state.apiKey && state.mode !== "favorites") {
+    const currentScroll = window.scrollY;
+    renderCards(state.visibleItems);
+    window.scrollTo({top:currentScroll, behavior:"instant"});
+  } else {
+    renderFilteredLocal();
+  }
+}
+
+function resetFilters() {
+  DOM.search.value = "";
+  DOM.media.value = "all";
+  DOM.genre.value = "all";
+  DOM.year.value = "all";
+  DOM.sort.value = "popular";
+  state.page = 1;
+  setMode("trending");
+}
+
+function populateYears() {
+  const currentYear = new Date().getFullYear();
+  for (let year = currentYear + 2; year >= 1950; year--) {
+    const option = document.createElement("option");
+    option.value = String(year);
+    option.textContent = String(year);
+    DOM.year.appendChild(option);
+  }
+}
+
+function mergeLibrary(items) {
+  const map = new Map(state.library.map(item => [itemKey(item), item]));
+  items.forEach(item => map.set(itemKey(item), item));
+  state.library = [...map.values()];
+}
+
+async function apiFetch(path, params = {}) {
+  if (!state.apiKey) throw new Error("أدخل مفتاح TMDB أولًا.");
+  const url = new URL(CONFIG.apiBase + path);
+  Object.entries(params).forEach(([key, value]) => {
+    if (value !== undefined && value !== null && value !== "") url.searchParams.set(key, value);
+  });
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), CONFIG.requestTimeout);
+  try {
+    const response = await fetch(url.toString(), {
+      method: "GET",
+      headers: {
+        "Authorization": "Bearer " + state.apiKey,
+        "accept": "application/json"
+      },
+      signal: controller.signal
+    });
+    if (!response.ok) {
+      if (response.status === 401) throw new Error("مفتاح TMDB غير صحيح. استخدم API Read Access Token.");
+      if (response.status === 403) throw new Error("المفتاح غير مسموح له بالوصول لهذه البيانات.");
+      if (response.status === 429) throw new Error("طلبات كثيرة. انتظر قليلًا ثم أعد المحاولة.");
+      throw new Error(`تعذر جلب البيانات (HTTP ${response.status}).`);
+    }
+    return await response.json();
+  } catch (error) {
+    if (error.name === "AbortError") throw new Error("انتهت مهلة الاتصال. حاول مرة أخرى.");
+    throw error;
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+function setLoading(message = "جاري البحث في المكتبة العالمية...") {
+  state.loading = true;
+  DOM.info.textContent = message;
+  DOM.grid.innerHTML = '<div class="spinner" aria-label="جاري التحميل"></div>';
+  DOM.loadWrap.hidden = true;
+  DOM.pagination.innerHTML = "";
+}
+
+function currentRemotePath() {
+  const query = DOM.search.value.trim();
+  const media = DOM.media.value;
+  const genre = DOM.genre.value;
+  const year = DOM.year.value;
+  const params = {language:"en-US", page:state.page, include_adult:false};
+  if (genre !== "all") params.with_genres = genre;
+  if (year !== "all") {
+    if (media === "tv" || state.mode === "tv") params.first_air_date_year = year;
+    else params.primary_release_year = year;
+  }
+
+  if (query) {
+    if (media === "movie") return {path:"/search/movie", params:{...params, query}};
+    if (media === "tv") return {path:"/search/tv", params:{...params, query}};
+    return {path:"/search/multi", params:{...params, query}};
+  }
+
+  if (state.mode === "upcoming") {
+    return {path:"/movie/upcoming", params};
+  }
+  if (state.mode === "top") {
+    return {path:media === "tv" ? "/tv/top_rated" : "/movie/top_rated", params};
+  }
+  if (state.mode === "animation") {
+    const path = media === "tv" ? "/discover/tv" : "/discover/movie";
+    return {path, params:{...params, with_genres:genre === "all" ? "16" : `${genre},16`, sort_by:"popularity.desc"}};
+  }
+  if (state.mode === "movie" || media === "movie") {
+    return {path:"/discover/movie", params:{...params, sort_by:"popularity.desc"}};
+  }
+  if (state.mode === "tv" || media === "tv") {
+    return {path:"/discover/tv", params:{...params, sort_by:"popularity.desc"}};
+  }
+  return {path:"/trending/all/week", params};
+}
+
+async function fetchRemote(append = false) {
+  if (!state.apiKey) {
+    renderFilteredLocal();
+    return;
+  }
+  if (state.mode === "favorites") {
+    renderFilteredLocal();
+    return;
+  }
+  const requestId = ++state.requestId;
+  if (!append) {
+    state.page = 1;
+    setLoading();
+  } else {
+    DOM.loadButton.disabled = true;
+    DOM.loadButton.textContent = "جاري التحميل...";
+  }
+
+  try {
+    const {path, params} = currentRemotePath();
+    const data = await apiFetch(path, params);
+    if (requestId !== state.requestId) return;
+
+    const normalized = (data.results || [])
+      .filter(raw => raw.media_type !== "person")
+      .map(raw => normalizeItem({
+        ...raw,
+        media_type: raw.media_type || (raw.name && !raw.title ? "tv" : (path.includes("/tv") ? "tv" : "movie"))
+      }));
+
+    mergeLibrary(normalized);
+    state.totalPages = Math.min(Number(data.total_pages || 1), CONFIG.maxApiPages);
+    state.totalResults = Number(data.total_results ?? normalized.length);
+
+    const sorted = sortItems(normalized);
+    if (append) {
+      const combined = [...state.visibleItems, ...sorted];
+      renderCards(uniqueByKey(combined));
+    } else {
+      renderCards(sorted);
+    }
+
+    DOM.info.textContent = `النتائج: ${state.totalResults.toLocaleString("en-US")} — الصفحة ${state.page}`;
+    DOM.count.textContent = `${state.totalResults.toLocaleString("en-US")} نتيجة`;
+    DOM.loadWrap.hidden = state.page >= state.totalPages;
+    DOM.loadButton.disabled = false;
+    DOM.loadButton.textContent = "عرض المزيد ↓";
+    DOM.pagination.innerHTML = "";
+    state.loading = false;
+    setStatus("متصل بـ TMDB ✓");
+  } catch (error) {
+    if (requestId !== state.requestId) return;
+    state.loading = false;
+    DOM.loadButton.disabled = false;
+    DOM.loadButton.textContent = "عرض المزيد ↓";
+    setStatus(error.message + " يتم عرض المكتبة المحلية.", true);
+    renderFilteredLocal();
+  }
+}
+
+function sortItems(items) {
+  const sort = DOM.sort.value;
+  const result = [...items];
+  if (sort === "rating") result.sort((a, b) => b.rating - a.rating);
+  if (sort === "newest") result.sort((a, b) => Number(b.year) - Number(a.year));
+  if (sort === "oldest") result.sort((a, b) => Number(a.year) - Number(b.year));
+  if (sort === "az") result.sort((a, b) => a.title.localeCompare(b.title));
+  if (sort === "popular") result.sort((a, b) => b.popularity - a.popularity);
+  return result;
+}
+
+function uniqueByKey(items) {
+  const seen = new Set();
+  return items.filter(item => {
+    const key = itemKey(item);
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function searchNow() {
+  state.page = 1;
+  if (state.apiKey && state.mode !== "favorites") fetchRemote(false);
+  else renderFilteredLocal();
+}
+
+function openDetails(item) {
+  state.currentItem = item;
+  state.lastFocus = document.activeElement;
+  DOM.modalTitle.textContent = item.title;
+  DOM.modalBackdrop.src = item.backdrop || item.poster || CONFIG.backdropPlaceholder;
+  DOM.modalBackdrop.onerror = () => {
+    DOM.modalBackdrop.onerror = null;
+    DOM.modalBackdrop.src = item.poster || CONFIG.backdropPlaceholder;
+  };
+  DOM.modalOverview.textContent = item.overview || "لا يتوفر وصف لهذا العمل حاليًا.";
+  DOM.modalMeta.innerHTML = "";
+  const values = [
+    typeLabel(item),
+    `📅 ${item.year}`,
+    `⭐ ${Number(item.rating || 0).toFixed(1)} / 10`,
+    ...(item.genres || []).map(id => GENRES[id]).filter(Boolean).slice(0, 4)
+  ];
+  values.forEach(value => {
+    const span = document.createElement("span");
+    span.textContent = value;
+    DOM.modalMeta.appendChild(span);
+  });
+  DOM.castList.innerHTML = "";
+  DOM.castHeading.hidden = true;
+  DOM.trailerContainer.innerHTML = "";
+  DOM.trailerButton.disabled = false;
+  DOM.trailerButton.title = state.apiKey ? "مشاهدة التريلر المتاح" : "البحث عن فيديو العمل على يوتيوب";
+  DOM.externalLink.href = `https://www.themoviedb.org/${item.type}/${encodeURIComponent(item.externalId || item.id)}`;
+  updateModalFavorite();
+  DOM.modal.classList.add("open");
+  document.body.style.overflow = "hidden";
+  document.getElementById("closeModal").focus();
+  if (state.apiKey) loadDetailsExtras(item);
+}
+
+function updateModalFavorite() {
+  if (!state.currentItem) return;
+  DOM.modalFavorite.textContent = isFavorite(state.currentItem) ? "♥ إزالة من المفضلة" : "♥ أضف للمفضلة";
+}
+
+async function loadDetailsExtras(item) {
+  const requestId = state.requestId;
+  const media = item.type;
+  const id = item.externalId || item.id;
+  try {
+    const [details, credits, videos] = await Promise.all([
+      apiFetch(`/${media}/${id}`, {language:"en-US"}),
+      apiFetch(`/${media}/${id}/credits`, {language:"en-US"}),
+      apiFetch(`/${media}/${id}/videos`, {language:"en-US"})
+    ]);
+    if (!state.currentItem || itemKey(state.currentItem) !== itemKey(item)) return;
+    if (details.overview) DOM.modalOverview.textContent = details.overview;
+    if (details.tagline) {
+      const tagline = document.createElement("p");
+      tagline.className = "modal-overview";
+      tagline.style.fontStyle = "italic";
+      tagline.textContent = `“${details.tagline}”`;
+      DOM.modalOverview.before(tagline);
+      setTimeout(() => tagline.remove(), 0);
+    }
+    renderCast(credits.cast || []);
+    DOM.trailerButton.disabled = !(videos.results || []).some(video => video.site === "YouTube" && ["Trailer","Teaser"].includes(video.type));
+    DOM.trailerButton.dataset.videos = JSON.stringify(videos.results || []);
+    DOM.trailerButton.title = "مشاهدة التريلر المتاح";
+    DOM.externalLink.href = `https://www.themoviedb.org/${media}/${id}`;
+  } catch (error) {
+    /* The overview and base information remain available if credits/videos fail. */
+  }
+}
+
+function renderCast(cast) {
+  const people = cast.slice(0, 12);
+  if (!people.length) return;
+  DOM.castHeading.hidden = false;
+  DOM.castList.innerHTML = people.map(person => {
+    const image = person.profile_path ? CONFIG.imageBase + "w185" + person.profile_path : CONFIG.placeholder;
+    return `<div class="cast-person">
+      <img src="${escapeHTML(image)}" alt="${escapeHTML(person.name)}" loading="lazy">
+      <strong>${escapeHTML(person.name)}</strong>
+      <span>${escapeHTML(person.character || "")}</span>
+    </div>`;
+  }).join("");
+  DOM.castList.querySelectorAll("img").forEach(image => {
+    image.addEventListener("error", () => image.src = CONFIG.placeholder, {once:true});
+  });
+}
+
+function closeDetails() {
+  DOM.modal.classList.remove("open");
+  document.body.style.overflow = "";
+  state.currentItem = null;
+  DOM.trailerContainer.innerHTML = "";
+  if (state.lastFocus && typeof state.lastFocus.focus === "function") state.lastFocus.focus();
+}
+
+function playTrailer() {
+  if (!state.apiKey) {
+    const item = state.currentItem;
+    if (!item) return;
+    const query = encodeURIComponent(`${item.title} ${item.year} official trailer`);
+    window.open(`https://www.youtube.com/results?search_query=${query}`, "_blank", "noopener,noreferrer");
+    return;
+  }
+  let videos = [];
+  try { videos = JSON.parse(DOM.trailerButton.dataset.videos || "[]"); } catch {}
+  const trailer = videos.find(video => video.site === "YouTube" && video.type === "Trailer")
+    || videos.find(video => video.site === "YouTube" && video.type === "Teaser");
+  if (!trailer) {
+    notify("لا يوجد تريلر متاح لهذا العمل.");
+    return;
+  }
+  DOM.trailerContainer.innerHTML = `<div class="trailer-frame">
+    <iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(trailer.key)}?autoplay=1&rel=0"
+      title="${escapeHTML(trailer.name || "Trailer")}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>`;
+  DOM.trailerContainer.scrollIntoView({behavior:"smooth", block:"nearest"});
+}
+
+function showFavorites() {
+  setMode("favorites");
+  document.getElementById("discover").scrollIntoView({behavior:"smooth"});
+}
+
+function applyTheme(theme) {
+  state.theme = theme;
+  document.body.classList.toggle("light", theme === "light");
+  document.getElementById("themeButton").textContent = theme === "light" ? "☾" : "☼";
+  try { localStorage.setItem(CONFIG.themeKey, theme); } catch {}
+}
+
+function toggleTheme() {
+  applyTheme(state.theme === "dark" ? "light" : "dark");
+}
+
+function connectApi() {
+  const value = DOM.apiInput.value.trim();
+  if (!value) {
+    setStatus("اكتب TMDB API Read Access Token أولًا.", true);
+    return;
+  }
+  state.apiKey = value;
+  try { sessionStorage.setItem("moviehub_tmdb_token", value); } catch {}
+  state.page = 1;
+  fetchRemote(false);
+}
+
+function disconnectApi() {
+  state.apiKey = "";
+  try { sessionStorage.removeItem("moviehub_tmdb_token"); } catch {}
+  DOM.apiInput.value = "";
+  setStatus("تم فصل TMDB. الموقع يعمل بالمكتبة التجريبية.");
+  state.page = 1;
+  renderFilteredLocal();
+}
+
+function bindEvents() {
+  document.getElementById("searchButton").addEventListener("click", searchNow);
+  DOM.search.addEventListener("keydown", event => {
+    if (event.key === "Enter") searchNow();
+  });
+  DOM.search.addEventListener("input", () => {
+    clearTimeout(state.searchTimer);
+    state.searchTimer = setTimeout(searchNow, 350);
+  });
+  [DOM.media, DOM.genre, DOM.year, DOM.sort].forEach(control => {
+    control.addEventListener("change", searchNow);
+  });
+
+  document.querySelectorAll("[data-mode]").forEach(button => {
+    button.addEventListener("click", () => setMode(button.dataset.mode));
+  });
+  document.querySelectorAll("[data-genre]").forEach(button => {
+    button.addEventListener("click", () => {
+      DOM.genre.value = button.dataset.genre;
+      setMode("trending");
+      document.getElementById("discover").scrollIntoView({behavior:"smooth"});
+    });
+  });
+
+  document.getElementById("favoritesButton").addEventListener("click", showFavorites);
+  document.getElementById("heroFavorites").addEventListener("click", showFavorites);
+  document.getElementById("navFavorites").addEventListener("click", event => {
+    event.preventDefault();
+    showFavorites();
+  });
+  document.getElementById("themeButton").addEventListener("click", toggleTheme);
+  document.getElementById("mobileMenu").addEventListener("click", showFavorites);
+  document.getElementById("connectButton").addEventListener("click", connectApi);
+  document.getElementById("disconnectButton").addEventListener("click", disconnectApi);
+  DOM.loadButton.addEventListener("click", () => {
+    if (state.page >= state.totalPages) return;
+    state.page += 1;
+    if (state.apiKey) fetchRemote(true);
+    else renderFilteredLocal();
+  });
+  document.getElementById("closeModal").addEventListener("click", closeDetails);
+  DOM.modal.addEventListener("click", event => {
+    if (event.target === DOM.modal) closeDetails();
+  });
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && DOM.modal.classList.contains("open")) closeDetails();
+  });
+  DOM.modalFavorite.addEventListener("click", () => {
+    if (state.currentItem) toggleFavorite(state.currentItem);
+  });
+  DOM.trailerButton.addEventListener("click", playTrailer);
+  DOM.apiInput.addEventListener("keydown", event => {
+    if (event.key === "Enter") connectApi();
+  });
+}
+
+function initialize() {
+  populateYears();
+  updateFavoritesCount();
+  bindEvents();
+
+  const savedTheme = (() => {
+    try { return localStorage.getItem(CONFIG.themeKey) || "dark"; }
+    catch { return "dark"; }
+  })();
+  applyTheme(savedTheme);
+
+  try {
+    const storedToken = sessionStorage.getItem("moviehub_tmdb_token");
+    if (storedToken) {
+      state.apiKey = storedToken;
+      DOM.apiInput.value = storedToken;
+      fetchRemote(false);
+      return;
+    }
+  } catch {}
+  renderFilteredLocal();
+}
+
+initialize();
+</script>
+
+<script>
+(function(){
+  const lang = document.getElementById('siteLanguage');
+  const panel = document.getElementById('aiPanel');
+  const launch = document.getElementById('aiLaunch');
+  const close = document.getElementById('aiClose');
+  const form = document.getElementById('aiForm');
+  const prompt = document.getElementById('aiPrompt');
+  const messages = document.getElementById('aiMessages');
+  const hint = document.getElementById('aiHint');
+  let mode = 'chat', busy = false;
+  const hints = {
+    chat:'اسأل عن البحث، الأفلام، التصنيفات، أو طريقة تطوير الموقع.',
+    image:'اكتب وصف الصورة التي تريدها، مثل: بوستر خيال علمي بألوان بنفسجية.',
+    code:'اطلب كود HTML أو CSS أو JavaScript أو مشروع موقع سينما كامل.'
+  };
+  const placeholders = {chat:'اكتب سؤالك هنا...',image:'صف الصورة التي تريد إنشاءها...',code:'اكتب نوع الموقع أو الكود الذي تحتاجه...'};
+  function setMode(next){
+    mode=next;
+    document.querySelectorAll('[data-ai-mode]').forEach(b=>b.classList.toggle('active',b.dataset.aiMode===mode));
+    hint.textContent=hints[mode]; prompt.placeholder=placeholders[mode];
+  }
+  function addMessage(text, who, imageUrl){
+    const node=document.createElement('div'); node.className='ai-msg '+who; node.textContent=text;
+    if(imageUrl){const img=document.createElement('img');img.src=imageUrl;img.alt='الصورة التي أنشأها الذكاء الاصطناعي';img.className='creator-image';node.appendChild(img);
+      const a=document.createElement('a');a.href=imageUrl;a.target='_blank';a.rel='noopener';a.textContent='فتح الصورة بالحجم الكامل';a.style.display='block';a.style.marginTop='8px';node.appendChild(a);}
+    messages.appendChild(node); messages.scrollTop=messages.scrollHeight; return node;
+  }
+  launch.addEventListener('click',()=>{panel.classList.toggle('open');launch.setAttribute('aria-expanded',String(panel.classList.contains('open')));if(panel.classList.contains('open'))prompt.focus();});
+  close.addEventListener('click',()=>{panel.classList.remove('open');launch.setAttribute('aria-expanded','false');});
+  document.querySelectorAll('[data-ai-mode]').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.aiMode)));
+  form.addEventListener('submit',async e=>{
+    e.preventDefault(); const text=prompt.value.trim(); if(!text||busy)return;
+    addMessage(text,'user'); prompt.value=''; busy=true; document.getElementById('aiSend').disabled=true;
+    const pending=addMessage('جاري التفكير...','bot');
+    try{
+      const response=await fetch(mode==='image'?'/api/image':'/api/ai',{
+        method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({prompt:text,mode,language:lang.value,context:{
+          site:'MovieHub cinema discovery website',
+          features:['movie and TV search','genres and filters','favorites','movie details','YouTube trailer search','TMDB integration','theme switcher','multilingual translation'],
+          instruction:'Answer in the selected language. For code requests, return practical code with brief setup notes. Be honest about limitations.'
+        }})
+      });
+      const data=await response.json();
+      if(!response.ok)throw new Error(data.error||'تعذر الاتصال بخدمة الذكاء الاصطناعي.');
+      pending.remove();
+      addMessage(data.text||data.message||(data.imageUrl?'تم إنشاء الصورة بنجاح.':'تم.'),'bot',data.imageUrl||data.image_url);
+      if(data.code){const codeNode=addMessage(data.code,'bot');codeNode.style.direction='ltr';codeNode.style.textAlign='left';const copy=document.createElement('button');copy.className='ai-mode';copy.textContent='نسخ الكود';copy.style.marginTop='8px';copy.onclick=async()=>{try{await navigator.clipboard.writeText(data.code);copy.textContent='تم النسخ ✓';}catch{copy.textContent='انسخ الكود يدويًا';}};codeNode.appendChild(copy);}
+    }catch(err){
+      pending.remove();
+      addMessage((err.message||'حدث خطأ.')+' تأكد من تشغيل server.js وإعداد OPENAI_API_KEY في الخادم. لا تضع مفتاح API داخل ملف HTML.','bot');
+    }finally{busy=false;document.getElementById('aiSend').disabled=false;prompt.focus();}
+  });
+  lang.addEventListener('change',()=>{
+    const chosen=lang.value;
+    if(chosen==='ar'){document.cookie='googtrans=/auto/ar;path=/';document.cookie='googtrans=/auto/ar;path=/;domain='+location.hostname;}
+    else {document.cookie='googtrans=/auto/'+chosen+';path=/';document.cookie='googtrans=/auto/'+chosen+';path=/;domain='+location.hostname;}
+    if(window.google&&google.translate&&google.translate.TranslateElement){location.reload();}
+    else {
+      const old=document.getElementById('google-translate-script');if(!old){const script=document.createElement('script');script.id='google-translate-script';script.src='https://translate.google.com/translate_a/element.js?cb=googleTranslateInit';document.body.appendChild(script);}
+      else location.reload();
+    }
+  });
+  window.googleTranslateInit=function(){try{new google.translate.TranslateElement({pageLanguage:'ar',autoDisplay:false},'google_translate_element');setTimeout(()=>{const select=document.querySelector('.goog-te-combo');if(select){select.value=lang.value;select.dispatchEvent(new Event('change'));}},500);}catch(e){}};
+})();
+</script>
+
+</body>
+</html>
